@@ -5841,7 +5841,7 @@ var elm$http$Http$get = function (r) {
 var author$project$Main$getWttr = elm$http$Http$get(
 	{
 		expect: elm$http$Http$expectString(author$project$Main$GotWttr),
-		url: 'http://api.openweathermap.org/data/2.5/forecast?id=3161733&APPID=' + author$project$Main$getAPIKey
+		url: 'http://api.openweathermap.org/data/2.5/weather?id=3161733&APPID=' + author$project$Main$getAPIKey
 	});
 var author$project$Main$init = function (_n0) {
 	return _Utils_Tuple2(author$project$Main$Loading, author$project$Main$getWttr);
@@ -5885,7 +5885,7 @@ var author$project$Main$getRain = function (js) {
 		A2(
 			elm$json$Json$Decode$at,
 			_List_fromArray(
-				['list', '0', 'rain', '3h']),
+				['rain', '1h']),
 			elm$json$Json$Decode$float),
 		js);
 	if (_n0.$ === 'Ok') {
@@ -5901,10 +5901,7 @@ var elm$core$String$fromChar = function (_char) {
 	return A2(elm$core$String$cons, _char, '');
 };
 var author$project$Main$getRainStr = function (mm) {
-	return (mm < 0) ? _Utils_Tuple2(
-		elm$core$String$fromChar(
-			elm$core$Char$fromCode(10060)),
-		'Her har det skjedd noe feil.') : ((!mm) ? _Utils_Tuple2(
+	return (mm <= 0) ? _Utils_Tuple2(
 		elm$core$String$fromChar(
 			elm$core$Char$fromCode(9728)),
 		'Nei.') : (((mm > 0) && (mm < 1.0)) ? _Utils_Tuple2(
@@ -5925,7 +5922,7 @@ var author$project$Main$getRainStr = function (mm) {
 		'Jeg ville holdt meg inne om jeg var deg.') : _Utils_Tuple2(
 		elm$core$String$fromChar(
 			elm$core$Char$fromCode(127786)),
-		'Hva skal man egentlig ute?')))))));
+		'Hva skal man egentlig ute?'))))));
 };
 var elm$core$Tuple$second = function (_n0) {
 	var y = _n0.b;
