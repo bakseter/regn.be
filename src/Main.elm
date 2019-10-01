@@ -7,53 +7,47 @@ import Json.Decode exposing (..)
 
 main =
   Browser.element
-    { init = init
-    , update = update
-    , subscriptions = subscriptions
-    , view = view
-    }
+  { init = init,
+    update = update,
+    subscriptions = subscriptions,
+    view = view
+  }
 
 type Model
-  = Failure
-  | Loading
-  | Success String
+    = Failure
+    | Loading
+    | Success String
 
 
 init : () -> (Model, Cmd Msg)
 init _ =
-  (Loading, getWttr)
+    (Loading, getWttr)
 
 type Msg
-  = GotWttr (Result Http.Error String)
+    = GotWttr (Result Http.Error String)
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
-  case msg of
-    GotWttr result ->
-      case result of
-        Ok url ->
-          (Success url, Cmd.none)
-
-        Err _ ->
-          (Failure, Cmd.none)
+    case msg of 
+        GotWttr result ->
+            case result of
+                Ok url ->
+                    (Success url, Cmd.none)
+                Err _ ->
+                    (Failure, Cmd.none)
 
 subscriptions model =
   Sub.none
 
 view : Model -> Html Msg
 view model =
-  div [ class "mainText" ]
-    [ viewWttr model ]
-
-viewWttr : Model -> Html Msg
-viewWttr model =
   case model of
     Failure ->
-      div [ class "mainText" ]
-        [ text "Could not load weather." ]
+      div [ class "rainText" ]
+        [ text "Fikk ikke tak i værvarselet..." ]
     Loading ->
-      text "Loading..."
+      text "Laster..."
 
     Success url ->
       div []
@@ -64,7 +58,6 @@ viewWttr model =
           div [ class "rainUnicode" ] [ text (Tuple.first (getRainStr (getRain url))) ],
           div [ class "rainText" ] [ text (Tuple.second (getRainStr (getRain url))) ]
         ]
-
 
 getRainStr : Float -> (String, String)
 getRainStr mm =

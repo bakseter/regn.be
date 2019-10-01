@@ -1,4 +1,4 @@
-# regn.be-elm
+# regn.be
 
 Sjekker om det regner i Bergen i dag.
 
