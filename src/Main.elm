@@ -24,16 +24,12 @@ init _ =
   (Loading, getWttr)
 
 type Msg
-  = MorePlease
-  | GotWttr (Result Http.Error String)
+  = GotWttr (Result Http.Error String)
 
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    MorePlease ->
-      (Loading, getWttr)
-
     GotWttr result ->
       case result of
         Ok url ->
@@ -47,29 +43,21 @@ subscriptions model =
 
 view : Model -> Html Msg
 view model =
-  div []
-    [ h1 [ style "text-align" "center" ] [ text "Rain" ]
-    , viewWttr model
-    ]
-
+  div [ class "mainText" ]
+    [ viewWttr model ]
 
 viewWttr : Model -> Html Msg
 viewWttr model =
   case model of
     Failure ->
-      div []
-        [ text "Could not load weather."
-        , button [ onClick MorePlease, style "display" "block" ] [ text "Try Again!" ]
-        ]
-
+      div [ class "mainText" ]
+        [ text "Could not load weather." ]
     Loading ->
       text "Loading..."
 
     Success url ->
       div []
-        [ button [ onClick MorePlease, style "display" "block" ] [ text "More Please!" ]
-        , p [] [ text (String.fromFloat(jsonDecoder url)) ]
-        ]
+        [ text (String.fromFloat(jsonDecoder url)) ]
 
 getWttr : Cmd Msg
 getWttr =
@@ -81,7 +69,7 @@ getWttr =
 
 --getAPIKey : String
 getAPIKey =
-    ""
+    "bd4001045f14f9f74d66293492e32130"
 
 jsonDecoder : String -> Float
 jsonDecoder js =
