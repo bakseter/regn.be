@@ -59,7 +59,7 @@ view model =
 getRainStr : Float -> (String, String)
 getRainStr mm =
             if mm <= 0 then
-                (String.fromChar (Char.fromCode 0x2600), "Nei.")
+                (String.fromChar (Char.fromCode 0x1F324), "Nei.")
             else if mm > 0 && mm < 1.0 then
                 (String.fromChar (Char.fromCode 0x1F327), "Ja, men bare litt.")
             else if mm < 1.5 && mm > 1.0 then

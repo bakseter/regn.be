@@ -5903,7 +5903,7 @@ var elm$core$String$fromChar = function (_char) {
 var author$project$Main$getRainStr = function (mm) {
 	return (mm <= 0) ? _Utils_Tuple2(
 		elm$core$String$fromChar(
-			elm$core$Char$fromCode(9728)),
+			elm$core$Char$fromCode(127780)),
 		'Nei.') : (((mm > 0) && (mm < 1.0)) ? _Utils_Tuple2(
 		elm$core$String$fromChar(
 			elm$core$Char$fromCode(127783)),
