@@ -6,12 +6,12 @@ import Http
 import Json.Decode exposing (..)
 
 main =
-  Browser.element
-  { init = init,
-    update = update,
-    subscriptions = subscriptions,
-    view = view
-  }
+    Browser.element { 
+        init = init,
+        update = update,
+        subscriptions = subscriptions,
+        view = view
+    }
 
 type Model
     = Failure
@@ -61,9 +61,11 @@ view model =
 
 getRainStr : Float -> (String, String)
 getRainStr mm =
-            if mm == 0 then
+            if mm < 0 then
+                (String.fromChar (Char.fromCode 0x274C), "Her har det skjedd noe feil.")
+            else if mm == 0 then
                 (String.fromChar (Char.fromCode 0x2600), "Nei.")
-            else if mm < 1.0 then
+            else if mm > 0 && mm < 1.0 then
                 (String.fromChar (Char.fromCode 0x1F327), "Ja, men bare litt.")
             else if mm < 1.5 && mm > 1.0 then
                 (String.fromChar (Char.fromCode 0x1F327), "Ja, en del.")
@@ -84,11 +86,10 @@ getWttr =
     }
 
 
---getAPIKey : String
+getAPIKey : String
 getAPIKey =
     "bd4001045f14f9f74d66293492e32130"
 
---- main, description, temp, speed, 3h
 getType : String -> String
 getType js =
     case decodeString (at ["list", "0", "weather", "0", "main"] string) js of

@@ -5901,10 +5901,13 @@ var elm$core$String$fromChar = function (_char) {
 	return A2(elm$core$String$cons, _char, '');
 };
 var author$project$Main$getRainStr = function (mm) {
-	return (!mm) ? _Utils_Tuple2(
+	return (mm < 0) ? _Utils_Tuple2(
+		elm$core$String$fromChar(
+			elm$core$Char$fromCode(10060)),
+		'Her har det skjedd noe feil.') : ((!mm) ? _Utils_Tuple2(
 		elm$core$String$fromChar(
 			elm$core$Char$fromCode(9728)),
-		'Nei.') : ((mm < 1.0) ? _Utils_Tuple2(
+		'Nei.') : (((mm > 0) && (mm < 1.0)) ? _Utils_Tuple2(
 		elm$core$String$fromChar(
 			elm$core$Char$fromCode(127783)),
 		'Ja, men bare litt.') : (((mm < 1.5) && (mm > 1.0)) ? _Utils_Tuple2(
@@ -5922,7 +5925,7 @@ var author$project$Main$getRainStr = function (mm) {
 		'Jeg ville holdt meg inne om jeg var deg.') : _Utils_Tuple2(
 		elm$core$String$fromChar(
 			elm$core$Char$fromCode(127786)),
-		'Hva skal man egentlig ute?'))))));
+		'Hva skal man egentlig ute?')))))));
 };
 var elm$core$Tuple$second = function (_n0) {
 	var y = _n0.b;
@@ -5955,21 +5958,21 @@ var elm$html$Html$Attributes$stringProperty = F2(
 			elm$json$Json$Encode$string(string));
 	});
 var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
-var author$project$Main$viewWttr = function (model) {
+var author$project$Main$view = function (model) {
 	switch (model.$) {
 		case 'Failure':
 			return A2(
 				elm$html$Html$div,
 				_List_fromArray(
 					[
-						elm$html$Html$Attributes$class('mainText')
+						elm$html$Html$Attributes$class('rainText')
 					]),
 				_List_fromArray(
 					[
-						elm$html$Html$text('Could not load weather.')
+						elm$html$Html$text('Fikk ikke tak i værvarselet...')
 					]));
 		case 'Loading':
-			return elm$html$Html$text('Loading...');
+			return elm$html$Html$text('Laster...');
 		default:
 			var url = model.a;
 			return A2(
@@ -6003,18 +6006,6 @@ var author$project$Main$viewWttr = function (model) {
 							]))
 					]));
 	}
-};
-var author$project$Main$view = function (model) {
-	return A2(
-		elm$html$Html$div,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class('mainText')
-			]),
-		_List_fromArray(
-			[
-				author$project$Main$viewWttr(model)
-			]));
 };
 var elm$browser$Browser$External = function (a) {
 	return {$: 'External', a: a};
