@@ -1,2 +1,5 @@
 # regn.be-elm
-regn.be Elm
+
+Sjekker om det regner i Bergen i dag.
+
+[https://regn.be](Nettsiden)
