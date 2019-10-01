@@ -73,12 +73,15 @@ viewWttr model =
 
 getWttr : Cmd Msg
 getWttr =
-  Http.get
-    { --url = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cat"
-    url = "http://api.openweathermap.org/data/2.5/forecast?id=3161733&APPID=bd4001045f14f9f74d66293492e32130"
+  Http.get {
+    url = ("http://api.openweathermap.org/data/2.5/forecast?id=3161733&APPID=" ++ getAPIKey)
     , expect = Http.expectString GotWttr
     }
 
+
+--getAPIKey : String
+getAPIKey =
+    ""
 
 jsonDecoder : String -> Float
 jsonDecoder js =
