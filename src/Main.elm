@@ -61,26 +61,27 @@ viewWttr model =
           div [ class "descText" ] [ text (getDesc url) ],
           div [ class "tempText" ] [ text ((getTemp url) ++ " " ++ String.fromChar (Char.fromCode 176) ++ "C") ],
           div [ class "speedText" ] [ text ((getSpeed url) ++ " m/s") ], -}
-          div [ class "rainText" ] [ text (getRainStr (getRain url)) ]
+          div [ class "rainUnicode" ] [ text (Tuple.first (getRainStr (getRain url))) ],
+          div [ class "rainText" ] [ text (Tuple.second (getRainStr (getRain url))) ]
         ]
 
 
-getRainStr : Float -> String
-getRainStr mm = 
+getRainStr : Float -> (String, String)
+getRainStr mm =
             if mm == 0 then
-                "Nei."
+                (String.fromChar (Char.fromCode 0x2600), "Nei.")
             else if mm < 1.0 then
-                "Ja, men bare litt."
+                (String.fromChar (Char.fromCode 0x1F327), "Ja, men bare litt.")
             else if mm < 1.5 && mm > 1.0 then
-                "Ja, en del."
+                (String.fromChar (Char.fromCode 0x1F327), "Ja, en del.")
             else if mm < 2.0 && mm > 1.5 then
-                "Ja, ganske mye."
+                (String.fromChar (Char.fromCode 0x1F327), "Ja, ganske mye.")
             else if mm < 3.0 && mm > 2.0 then
-                "Ja, VELDIG mye."
+                (String.fromChar (Char.fromCode 0x1F327), "Ja, VELDIG mye.")
             else if mm < 5.0 && mm > 3.0 then
-                "Jeg ville holdt meg inne om jeg var deg."
+                (String.fromChar (Char.fromCode 0x26C8), "Jeg ville holdt meg inne om jeg var deg.")
             else
-                "Hva skal man egentlig ute?"
+                (String.fromChar (Char.fromCode 0x1F32A), "Hva skal man egentlig ute?")
 
 getWttr : Cmd Msg
 getWttr =

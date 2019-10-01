@@ -5895,8 +5895,38 @@ var author$project$Main$getRain = function (js) {
 		return -1;
 	}
 };
+var elm$core$Char$fromCode = _Char_fromCode;
+var elm$core$String$cons = _String_cons;
+var elm$core$String$fromChar = function (_char) {
+	return A2(elm$core$String$cons, _char, '');
+};
 var author$project$Main$getRainStr = function (mm) {
-	return (!mm) ? 'Nei.' : ((mm < 1.0) ? 'Ja, men bare litt.' : (((mm < 1.5) && (mm > 1.0)) ? 'Ja, en del.' : (((mm < 2.0) && (mm > 1.5)) ? 'Ja, ganske mye.' : (((mm < 3.0) && (mm > 2.0)) ? 'Ja, VELDIG mye.' : (((mm < 5.0) && (mm > 3.0)) ? 'Jeg ville holdt meg inne om jeg var deg.' : 'Hva skal man egentlig ute?')))));
+	return (!mm) ? _Utils_Tuple2(
+		elm$core$String$fromChar(
+			elm$core$Char$fromCode(9728)),
+		'Nei.') : ((mm < 1.0) ? _Utils_Tuple2(
+		elm$core$String$fromChar(
+			elm$core$Char$fromCode(127783)),
+		'Ja, men bare litt.') : (((mm < 1.5) && (mm > 1.0)) ? _Utils_Tuple2(
+		elm$core$String$fromChar(
+			elm$core$Char$fromCode(127783)),
+		'Ja, en del.') : (((mm < 2.0) && (mm > 1.5)) ? _Utils_Tuple2(
+		elm$core$String$fromChar(
+			elm$core$Char$fromCode(127783)),
+		'Ja, ganske mye.') : (((mm < 3.0) && (mm > 2.0)) ? _Utils_Tuple2(
+		elm$core$String$fromChar(
+			elm$core$Char$fromCode(127783)),
+		'Ja, VELDIG mye.') : (((mm < 5.0) && (mm > 3.0)) ? _Utils_Tuple2(
+		elm$core$String$fromChar(
+			elm$core$Char$fromCode(9928)),
+		'Jeg ville holdt meg inne om jeg var deg.') : _Utils_Tuple2(
+		elm$core$String$fromChar(
+			elm$core$Char$fromCode(127786)),
+		'Hva skal man egentlig ute?'))))));
+};
+var elm$core$Tuple$second = function (_n0) {
+	var y = _n0.b;
+	return y;
 };
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
@@ -5951,13 +5981,25 @@ var author$project$Main$viewWttr = function (model) {
 						elm$html$Html$div,
 						_List_fromArray(
 							[
+								elm$html$Html$Attributes$class('rainUnicode')
+							]),
+						_List_fromArray(
+							[
+								elm$html$Html$text(
+								author$project$Main$getRainStr(
+									author$project$Main$getRain(url)).a)
+							])),
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
 								elm$html$Html$Attributes$class('rainText')
 							]),
 						_List_fromArray(
 							[
 								elm$html$Html$text(
 								author$project$Main$getRainStr(
-									author$project$Main$getRain(url)))
+									author$project$Main$getRain(url)).b)
 							]))
 					]));
 	}
