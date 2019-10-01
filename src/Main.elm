@@ -57,7 +57,30 @@ viewWttr model =
 
     Success url ->
       div []
-        [ text (String.fromFloat(jsonDecoder url)) ]
+        [ {- div [ class "typeText" ] [ text (getType url) ],
+          div [ class "descText" ] [ text (getDesc url) ],
+          div [ class "tempText" ] [ text ((getTemp url) ++ " " ++ String.fromChar (Char.fromCode 176) ++ "C") ],
+          div [ class "speedText" ] [ text ((getSpeed url) ++ " m/s") ], -}
+          div [ class "rainText" ] [ text (getRainStr (getRain url)) ]
+        ]
+
+
+getRainStr : Float -> String
+getRainStr mm = 
+            if mm == 0 then
+                "Nei."
+            else if mm < 1.0 then
+                "Ja, men bare litt."
+            else if mm < 1.5 && mm > 1.0 then
+                "Ja, en del."
+            else if mm < 2.0 && mm > 1.5 then
+                "Ja, ganske mye."
+            else if mm < 3.0 && mm > 2.0 then
+                "Ja, VELDIG mye."
+            else if mm < 5.0 && mm > 3.0 then
+                "Jeg ville holdt meg inne om jeg var deg."
+            else
+                "Hva skal man egentlig ute?"
 
 getWttr : Cmd Msg
 getWttr =
@@ -71,13 +94,44 @@ getWttr =
 getAPIKey =
     "bd4001045f14f9f74d66293492e32130"
 
-jsonDecoder : String -> Float
-jsonDecoder js =
+--- main, description, temp, speed, 3h
+getType : String -> String
+getType js =
+    case decodeString (at ["list", "0", "weather", "0", "main"] string) js of
+        Ok val ->
+            val
+        Err _ ->
+            "error"
+
+getDesc : String -> String
+getDesc js =
+    case decodeString (at ["list", "0", "weather", "0", "description"] string) js of
+        Ok val ->
+            val
+        Err _ ->
+            "error"
+
+getTemp : String -> String 
+getTemp js =
+    case decodeString (at ["list", "0", "main", "temp"] float) js of
+        Ok val ->
+            String.slice 0 3 (String.fromFloat (val - 273.15))
+        Err _ ->
+            "error"
+
+getSpeed : String -> String
+getSpeed js =
+    case decodeString (at ["list", "0", "wind", "speed"] float) js of
+        Ok val ->
+            String.slice 0 3 (String.fromFloat val)
+        Err _ ->
+            "error"
+
+getRain : String -> Float
+getRain js =
     case decodeString (at ["list", "0", "rain", "3h"] float) js of
         Ok val ->
             val
         Err _ ->
-            10
-
-
+            -1
 

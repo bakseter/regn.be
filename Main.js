@@ -5869,6 +5869,9 @@ var author$project$Main$update = F2(
 			return _Utils_Tuple2(author$project$Main$Failure, elm$core$Platform$Cmd$none);
 		}
 	});
+var elm$core$Basics$negate = function (n) {
+	return -n;
+};
 var elm$json$Json$Decode$field = _Json_decodeField;
 var elm$json$Json$Decode$at = F2(
 	function (fields, decoder) {
@@ -5876,7 +5879,7 @@ var elm$json$Json$Decode$at = F2(
 	});
 var elm$json$Json$Decode$decodeString = _Json_runOnString;
 var elm$json$Json$Decode$float = _Json_decodeFloat;
-var author$project$Main$jsonDecoder = function (js) {
+var author$project$Main$getRain = function (js) {
 	var _n0 = A2(
 		elm$json$Json$Decode$decodeString,
 		A2(
@@ -5889,10 +5892,12 @@ var author$project$Main$jsonDecoder = function (js) {
 		var val = _n0.a;
 		return val;
 	} else {
-		return 10;
+		return -1;
 	}
 };
-var elm$core$String$fromFloat = _String_fromNumber;
+var author$project$Main$getRainStr = function (mm) {
+	return (!mm) ? 'Nei.' : ((mm < 1.0) ? 'Ja, men bare litt.' : (((mm < 1.5) && (mm > 1.0)) ? 'Ja, en del.' : (((mm < 2.0) && (mm > 1.5)) ? 'Ja, ganske mye.' : (((mm < 3.0) && (mm > 2.0)) ? 'Ja, VELDIG mye.' : (((mm < 5.0) && (mm > 3.0)) ? 'Jeg ville holdt meg inne om jeg var deg.' : 'Hva skal man egentlig ute?')))));
+};
 var elm$json$Json$Decode$map = _Json_map1;
 var elm$json$Json$Decode$map2 = _Json_map2;
 var elm$json$Json$Decode$succeed = _Json_succeed;
@@ -5942,9 +5947,18 @@ var author$project$Main$viewWttr = function (model) {
 				_List_Nil,
 				_List_fromArray(
 					[
-						elm$html$Html$text(
-						elm$core$String$fromFloat(
-							author$project$Main$jsonDecoder(url)))
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('rainText')
+							]),
+						_List_fromArray(
+							[
+								elm$html$Html$text(
+								author$project$Main$getRainStr(
+									author$project$Main$getRain(url)))
+							]))
 					]));
 	}
 };
