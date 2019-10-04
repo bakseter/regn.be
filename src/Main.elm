@@ -46,6 +46,7 @@ view model =
     Failure ->
       div [ class "rainText" ]
         [ text "Fikk ikke tak i værvarselet..." ]
+
     Loading ->
       text "Laster..."
 
