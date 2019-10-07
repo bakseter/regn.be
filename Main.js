@@ -5885,7 +5885,7 @@ var author$project$Main$getRain = function (js) {
 		A2(
 			elm$json$Json$Decode$at,
 			_List_fromArray(
-				['list', '0', 'rain', '1h']),
+				['list', '0', 'rain', '3h']),
 			elm$json$Json$Decode$float),
 		js);
 	if (_n0.$ === 'Ok') {
