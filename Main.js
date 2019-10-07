@@ -5841,7 +5841,7 @@ var elm$http$Http$get = function (r) {
 var author$project$Main$getWttr = elm$http$Http$get(
 	{
 		expect: elm$http$Http$expectString(author$project$Main$GotWttr),
-		url: 'http://api.openweathermap.org/data/2.5/weather?id=3161733&APPID=' + author$project$Main$getAPIKey
+		url: 'http://api.openweathermap.org/data/2.5/forecast?id=3161733&APPID=' + author$project$Main$getAPIKey
 	});
 var author$project$Main$init = function (_n0) {
 	return _Utils_Tuple2(author$project$Main$Loading, author$project$Main$getWttr);
@@ -5879,13 +5879,13 @@ var elm$json$Json$Decode$at = F2(
 	});
 var elm$json$Json$Decode$decodeString = _Json_runOnString;
 var elm$json$Json$Decode$float = _Json_decodeFloat;
-var author$project$Main$getBackupRain = function (js) {
+var author$project$Main$getRain = function (js) {
 	var _n0 = A2(
 		elm$json$Json$Decode$decodeString,
 		A2(
 			elm$json$Json$Decode$at,
 			_List_fromArray(
-				['rain', '3h']),
+				['list', '0', 'rain', '1h']),
 			elm$json$Json$Decode$float),
 		js);
 	if (_n0.$ === 'Ok') {
@@ -5895,28 +5895,13 @@ var author$project$Main$getBackupRain = function (js) {
 		return -1;
 	}
 };
-var author$project$Main$getRain = function (js) {
-	var _n0 = A2(
-		elm$json$Json$Decode$decodeString,
-		A2(
-			elm$json$Json$Decode$at,
-			_List_fromArray(
-				['rain', '1h']),
-			elm$json$Json$Decode$float),
-		js);
-	if (_n0.$ === 'Ok') {
-		var val = _n0.a;
-		return val;
-	} else {
-		return author$project$Main$getBackupRain(js);
-	}
-};
 var elm$core$Char$fromCode = _Char_fromCode;
 var elm$core$String$cons = _String_cons;
 var elm$core$String$fromChar = function (_char) {
 	return A2(elm$core$String$cons, _char, '');
 };
-var author$project$Main$getRainStr = function (mm) {
+var author$project$Main$getRainStr = function (mmm) {
+	var mm = mmm / 3;
 	return (mm <= 0) ? _Utils_Tuple2(
 		elm$core$String$fromChar(
 			elm$core$Char$fromCode(127780)),

@@ -58,26 +58,28 @@ view model =
         ]
 
 getRainStr : Float -> (String, String)
-getRainStr mm =
-            if mm <= 0 then
-                (String.fromChar (Char.fromCode 0x1F324), "Nei.")
-            else if mm > 0 && mm < 1.0 then
-                (String.fromChar (Char.fromCode 0x1F327), "Ja, men bare litt.")
-            else if mm < 1.5 && mm > 1.0 then
-                (String.fromChar (Char.fromCode 0x1F327), "Ja, en del.")
-            else if mm < 2.0 && mm > 1.5 then
-                (String.fromChar (Char.fromCode 0x1F327), "Ja, ganske mye.")
-            else if mm < 3.0 && mm > 2.0 then
-                (String.fromChar (Char.fromCode 0x1F327), "Ja, VELDIG mye.")
-            else if mm < 5.0 && mm > 3.0 then
-                (String.fromChar (Char.fromCode 0x26C8), "Jeg ville holdt meg inne om jeg var deg.")
-            else
-                (String.fromChar (Char.fromCode 0x1F32A), "Hva skal man egentlig ute?")
+getRainStr mmm =
+            let mm = mmm / 3
+            in
+                if mm <= 0 then
+                    (String.fromChar (Char.fromCode 0x1F324), "Nei.")
+                else if mm > 0 && mm < 1.0 then
+                    (String.fromChar (Char.fromCode 0x1F327), "Ja, men bare litt.")
+                else if mm < 1.5 && mm > 1.0 then
+                    (String.fromChar (Char.fromCode 0x1F327), "Ja, en del.")
+                else if mm < 2.0 && mm > 1.5 then
+                    (String.fromChar (Char.fromCode 0x1F327), "Ja, ganske mye.")
+                else if mm < 3.0 && mm > 2.0 then
+                    (String.fromChar (Char.fromCode 0x1F327), "Ja, VELDIG mye.")
+                else if mm < 5.0 && mm > 3.0 then
+                    (String.fromChar (Char.fromCode 0x26C8), "Jeg ville holdt meg inne om jeg var deg.")
+                else
+                    (String.fromChar (Char.fromCode 0x1F32A), "Hva skal man egentlig ute?")
 
 getWttr : Cmd Msg
 getWttr =
   Http.get {
-    url = ("http://api.openweathermap.org/data/2.5/weather?id=3161733&APPID=" ++ getAPIKey)
+    url = ("http://api.openweathermap.org/data/2.5/forecast?id=3161733&APPID=" ++ getAPIKey)
     , expect = Http.expectString GotWttr
     }
 
@@ -88,9 +90,16 @@ getAPIKey =
 
 getRain : String -> Float
 getRain js =
-    case decodeString (at ["rain", "1h"] float) js of
+    case decodeString (at ["list", "0", "rain", "1h"] float) js of
         Ok val ->
             val
         Err _ ->
             -1
 
+getBackupRain : String -> Float
+getBackupRain js =
+    case decodeString (at ["rain", "3h"] float) js of
+        Ok val ->
+            val
+        Err _ ->
+            -1
