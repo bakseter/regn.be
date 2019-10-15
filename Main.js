@@ -4489,7 +4489,7 @@ var author$project$Main$Loading = {$: 'Loading'};
 var author$project$Main$GotWttr = function (a) {
 	return {$: 'GotWttr', a: a};
 };
-var author$project$Main$getAPIKey = 'bd4001045f14f9f74d66293492e32130';
+var author$project$Main$getAPIKey = '';
 var elm$core$Elm$JsArray$foldr = _JsArray_foldr;
 var elm$core$Array$foldr = F3(
 	function (func, baseCase, _n0) {

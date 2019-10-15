@@ -86,7 +86,7 @@ getWttr =
 
 getAPIKey : String
 getAPIKey =
-    "bd4001045f14f9f74d66293492e32130"
+    ""
 
 getRain : String -> Float
 getRain js =
