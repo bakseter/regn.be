@@ -1,3 +1,5 @@
+module Main exposing (..)
+
 import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -53,8 +55,7 @@ view model =
       div []
         [ 
           div [ class "rainUnicode" ] [ text (Tuple.first (getRainStr (getRain url))) ],
-          div [ class "rainText" ] [ text (Tuple.second (getRainStr (getRain url))) ],
-          div [ class "bruhButton" ] [ audio [ src "bruh.mp3", controls True ] [] ]
+          div [ class "rainText" ] [ text (Tuple.second (getRainStr (getRain url))) ]
         ]
 
 getRainStr : Float -> (String, String)
@@ -95,3 +96,4 @@ getRain js =
             val
         Err _ ->
             -1
+
