@@ -91,7 +91,7 @@ getAPIKey =
 
 getRain : String -> Float
 getRain js =
-    case decodeString (at ["list", "0", "rain", "3h"] float) js of
+    case decodeString (at ["list", "0", "snow", "3h"] float) js of
         Ok val ->
             val
         Err _ ->
