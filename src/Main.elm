@@ -26,7 +26,6 @@ init _ =
 type Msg
     = GotWttr (Result Http.Error String)
 
-
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of 
@@ -54,7 +53,8 @@ view model =
       div []
         [ 
           div [ class "rainUnicode" ] [ text (Tuple.first (getRainStr (getRain url))) ],
-          div [ class "rainText" ] [ text (Tuple.second (getRainStr (getRain url))) ]
+          div [ class "rainText" ] [ text (Tuple.second (getRainStr (getRain url))) ],
+          div [ class "bruhButton" ] [ audio [ src "bruh.mp3", controls True ] [] ]
         ]
 
 getRainStr : Float -> (String, String)
@@ -86,7 +86,7 @@ getWttr =
 
 getAPIKey : String
 getAPIKey =
-    ""
+    "bd4001045f14f9f74d66293492e32130"
 
 getRain : String -> Float
 getRain js =

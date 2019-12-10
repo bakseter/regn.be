@@ -4489,7 +4489,7 @@ var author$project$Main$Loading = {$: 'Loading'};
 var author$project$Main$GotWttr = function (a) {
 	return {$: 'GotWttr', a: a};
 };
-var author$project$Main$getAPIKey = '';
+var author$project$Main$getAPIKey = 'bd4001045f14f9f74d66293492e32130';
 var elm$core$Elm$JsArray$foldr = _JsArray_foldr;
 var elm$core$Array$foldr = F3(
 	function (func, baseCase, _n0) {
@@ -5944,6 +5944,7 @@ var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
+var elm$html$Html$audio = _VirtualDom_node('audio');
 var elm$html$Html$div = _VirtualDom_node('div');
 var elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var elm$html$Html$text = elm$virtual_dom$VirtualDom$text;
@@ -5956,6 +5957,21 @@ var elm$html$Html$Attributes$stringProperty = F2(
 			elm$json$Json$Encode$string(string));
 	});
 var elm$html$Html$Attributes$class = elm$html$Html$Attributes$stringProperty('className');
+var elm$json$Json$Encode$bool = _Json_wrap;
+var elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			elm$json$Json$Encode$bool(bool));
+	});
+var elm$html$Html$Attributes$controls = elm$html$Html$Attributes$boolProperty('controls');
+var elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
 var author$project$Main$view = function (model) {
 	switch (model.$) {
 		case 'Failure':
@@ -6001,6 +6017,23 @@ var author$project$Main$view = function (model) {
 								elm$html$Html$text(
 								author$project$Main$getRainStr(
 									author$project$Main$getRain(url)).b)
+							])),
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('bruhButton')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$audio,
+								_List_fromArray(
+									[
+										elm$html$Html$Attributes$src('bruh.mp3'),
+										elm$html$Html$Attributes$controls(true)
+									]),
+								_List_Nil)
 							]))
 					]));
 	}
